@@ -45,6 +45,7 @@
     <form:errors path="categoryList"/>
     <br>
     <br>
+
 <%--    <label for="categories">Category</label>--%>
 <%--    <br>--%>
 <%--    <form:select  id="categories"--%>

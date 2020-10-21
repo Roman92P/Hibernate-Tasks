@@ -1,0 +1,14 @@
+INSERT INTO author(firstName, lastName) VALUES ('Imię pierwszego autora', 'Nazwisko pierwszego autora');
+INSERT INTO author(firstName, lastName) VALUES ('Imię drugiegi autora', 'Nazwisko drugiego autora');
+INSERT INTO author(firstName, lastName) VALUES ('Imię trzeciego autora', 'Nazwisko trzeciego autora');
+INSERT INTO author(firstName, lastName) VALUES ('Imię czwartego autora', 'Nazwisko czwartego autora');
+INSERT INTO author(firstName, lastName) VALUES ('Imię piątego autora', 'Nazwisko piątego autora');
+INSERT INTO author(firstName, lastName) VALUES ('Imię szóstego autora', 'Nazwisko szóstego autora');
+INSERT INTO Article(content, created, title, author_id) VALUES ('treść1', '2020-09-12 12:00:00','tytyuł1',1);
+INSERT INTO Article(content, created, title, author_id) VALUES ('treść2', '2020-09-12 12:00:00','tytyuł2',2);
+INSERT INTO Article(content, created, title, author_id) VALUES ('treść3', '2020-09-12 12:00:00','tytyuł3',3);
+INSERT INTO Article(content, created, title, author_id) VALUES ('treść4', '2020-09-11 12:00:00','tytyuł4',4);
+INSERT INTO Article(content, created, title, author_id) VALUES ('treść5', '2020-09-11 12:00:00','tytyuł5',5);
+INSERT INTO categories (description, name) VALUES ('Opis1','Nazwa opisu 1');
+INSERT INTO categories (description, name) VALUES ('Opis2','Nazwa opisu 2');
+INSERT INTO categories (description, name) VALUES ('Opis3','Nazwa opisu 3');

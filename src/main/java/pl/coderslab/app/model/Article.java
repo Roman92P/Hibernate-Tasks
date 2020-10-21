@@ -1,21 +1,11 @@
 package pl.coderslab.app.model;
-//    Utwórz encję Article,
-//    Encja ma zawierać następujące pola:
-//
-//    id
-//    title (max. 200 znaków),
-//    author - (powiązanie relacją do klasy Author) - artykuł może mieć tylko jednego autora
-//    categories - (powiązanie relacją do klasy Category) - artykuł może należeć do wielu kategorii
-//    content
-//    created (wartość ma być automatycznie dodawana podczas zapisu)
-//    updated (wartość ma być automatycznie zmieniana podczas edycji).
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -26,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-//@ArticleAnotation
 
 public class Article {
 
@@ -44,8 +33,7 @@ public class Article {
     private Author author;
 
 
-    @ValidateCategory
-    @NotNull
+    @Size(min = 1)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),

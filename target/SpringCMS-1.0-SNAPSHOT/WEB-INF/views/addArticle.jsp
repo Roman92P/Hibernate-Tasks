@@ -38,8 +38,8 @@
     <label for="categoryList">Choose category </label>
     <br>
     <form:select path="categoryList">
-        <form:option value="null" label="Please select one or more"/>
-        <form:options items="${categories.id}"/>
+        <form:option value="0" label="Please select one or more"/>
+        <form:options items="${categories}" itemValue="id" itemLabel="name"/>
     </form:select>
     <br>
     <form:errors path="categoryList"/>

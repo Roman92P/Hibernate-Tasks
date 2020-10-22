@@ -48,6 +48,9 @@
         <div class="clo-md-3" style="background-color: darkgray">
             <a href="/articles">Articles</a>
         </div>
+        <div class="clo-md-3" style="background-color: cornflowerblue">
+            <a href="/draft">Drafts</a>
+        </div>
     </div>
 </div>
 </body>

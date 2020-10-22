@@ -6,4 +6,5 @@ import pl.coderslab.app.model.Draft;
 
 @Repository
 public interface DraftRepository extends JpaRepository<Draft, Long> {
+
 }

@@ -10,12 +10,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Add article form</title>
 </head>
 <body>
 <%--@elvariable id="article" type="pl.coderslab.app.model.Article"--%>
 <form:form action="${pageContext.request.contextPath}/articles/add" method="post" modelAttribute="article">
-    <p hidden><form:input path="id"/></p>
+    <%--@declare id="draft"--%><p hidden><form:input path="id"/></p>
     <label for="content">Content</label>
     <br>
     <form:input path="content" id="content"/>
@@ -44,18 +46,11 @@
     <br>
     <form:errors path="categoryList"/>
     <br>
+    <label for ="draft">Draft</label>
     <br>
-<%--    <label for="categories">Category</label>--%>
-<%--    <br>--%>
-<%--    <form:select  id="categories"--%>
-<%--                  path="categoryList">--%>
-<%--        <form:option value="0" label="--Please Select--"/>--%>
-<%--        <form:options items="${categories}" itemLabel="name" itemValue="id"/>--%>
-<%--    </form:select>--%>
-<%--    <form:errors path="categoryList"/>--%>
-<%--    <br>--%>
-
-
+    <form:checkbox path="draft" label="Zapisz draft"/>
+    <form:errors path="draft"/>
+    <br>
     <input type="submit">
 </form:form>
 </body>

@@ -1,10 +1,4 @@
 package pl.coderslab.app.model;
-//    Utwórz encje o nazwie Author.
-//    Encja ma zawierać następujące pola:
-//
-//    id
-//    firstName
-//    lastName
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

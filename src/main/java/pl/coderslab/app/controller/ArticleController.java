@@ -5,22 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import pl.coderslab.app.model.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.app.model.Article;
+import pl.coderslab.app.model.Author;
+import pl.coderslab.app.model.Category;
+import pl.coderslab.app.model.Draft;
 import pl.coderslab.app.repository.ArticleDao;
 import pl.coderslab.app.repository.AuthorDao;
 import pl.coderslab.app.repository.CategoryDao;
 import pl.coderslab.app.repository.DraftRepository;
 
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Path;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.Validator;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/articles")
@@ -48,21 +49,11 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String addNewArticle(@Valid Article article, @Valid Draft draft){
-        Set<ConstraintViolation<Article>> validate = validator.validate(article);
-
-        Set<ConstraintViolation<Draft>> validate1 = validator.validate(draft, ValidationOne.class);
-        if(validate1.isEmpty()){
-            draftRepository.save(draft);
-            return "redirect:/draft";
-        }
-
-        if (!validate.isEmpty()&&!validate1.isEmpty()) {
+    public String addNewArticle(@Valid Article article, BindingResult result,HttpServletRequest httpServletRequest){
+        if(result.hasErrors()){
             return "addArticle";
         }
-        else if(validate.isEmpty()&&!validate1.isEmpty()) {
-            articleDao.saveArticle(article);
-        }
+        articleDao.saveArticle(article);
         return "redirect:/articles";
     }
 

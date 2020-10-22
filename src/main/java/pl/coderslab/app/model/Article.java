@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Article {
+public class Article{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +30,11 @@ public class Article {
     @Size(min = 10, message = "minimum 10 znaków")
     private String content;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "author_id")
-    @Null(groups = ValidationOne.class)
     private Author author;
 
 
-    @Null(groups = ValidationOne.class)
-    @Size(min = 1, message = "wybierz jedną kategorię lub więcej")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),
@@ -48,7 +43,6 @@ public class Article {
 
 
     @Transient
-    @NotNull(groups = ValidationOne.class)
     private boolean draft;
 
     public Article() {

@@ -15,9 +15,8 @@
     <title>Add article form</title>
 </head>
 <body>
-<%--@elvariable id="article" type="pl.coderslab.app.model.Article"--%>
 <form:form action="${pageContext.request.contextPath}/articles/add" method="post" modelAttribute="article">
-    <%--@declare id="draft"--%><p hidden><form:input path="id"/></p>
+    <p hidden><form:input path="id"/></p>
     <label for="content">Content</label>
     <br>
     <form:input path="content" id="content"/>
@@ -48,7 +47,7 @@
     <br>
     <label for ="draft">Draft</label>
     <br>
-    <form:checkbox path="draft" label="Zapisz draft"/>
+    <form:checkbox path="draft" label="draftcheck" value="1"/>
     <form:errors path="draft"/>
     <br>
     <input type="submit">

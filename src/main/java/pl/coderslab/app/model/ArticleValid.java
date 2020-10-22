@@ -1,4 +1,4 @@
 package pl.coderslab.app.model;
 
-public interface ValidationOne {
+public interface ArticleValid {
 }

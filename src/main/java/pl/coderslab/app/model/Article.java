@@ -3,12 +3,13 @@ package pl.coderslab.app.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.app.model.tests.CategoryValidate;
 
 import javax.persistence.*;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class Article{
     private Author author;
 
 
-    @Size(min=1, groups = {ArticleValid.class})
+    @CategoryValidate(groups = Default.class)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),

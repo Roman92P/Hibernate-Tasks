@@ -3,6 +3,7 @@ package pl.coderslab.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import pl.coderslab.app.model.Draft;
 import pl.coderslab.app.repository.DraftRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,10 @@ public class DraftController {
     }
 
     @PostMapping("/add")
-    public String addDraftFromForm(Draft draft) {
+    public String addDraftFromForm(@Valid Draft draft, BindingResult result) {
+        if(result.hasErrors()){
+            return "addDraft";
+        }
         draftRepository.save(draft);
         return "redirect:/draft";
     }

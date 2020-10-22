@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import pl.coderslab.app.converters.ArticleConverter;
 import pl.coderslab.app.converters.AuthorConverter;
 import pl.coderslab.app.converters.CategoryConverter;
 
@@ -51,7 +50,7 @@ public class AppConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getAuthorConverter());
         registry.addConverter(getCategoryConverter());
-        registry.addConverter(getArticleConverter());
+//        registry.addConverter(getArticleConverter());
 
     }
     @Bean
@@ -64,8 +63,8 @@ public class AppConfig implements WebMvcConfigurer {
         return new CategoryConverter();
     }
 
-    @Bean
-    public ArticleConverter getArticleConverter(){ return new ArticleConverter();}
+//    @Bean
+//    public ArticleConverter getArticleConverter(){ return new ArticleConverter();}
     @Bean
     public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();

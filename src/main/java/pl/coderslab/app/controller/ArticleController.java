@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.app.model.Article;
-import pl.coderslab.app.model.Author;
-import pl.coderslab.app.model.Category;
-import pl.coderslab.app.model.Draft;
+import pl.coderslab.app.model.*;
 import pl.coderslab.app.repository.ArticleDao;
 import pl.coderslab.app.repository.AuthorDao;
 import pl.coderslab.app.repository.CategoryDao;
 import pl.coderslab.app.repository.DraftRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/articles")
@@ -31,45 +30,55 @@ public class ArticleController {
 
     @Autowired
     Validator validator;
-   private final ArticleDao articleDao;
-   private final AuthorDao authorDao;
-   private final CategoryDao categoryDao;
-   private final DraftRepository draftRepository;
+    private final ArticleDao articleDao;
+    private final AuthorDao authorDao;
+    private final CategoryDao categoryDao;
+    private final DraftRepository draftRepository;
 
     @RequestMapping
-    public String showAllArticles(Model model){
+    public String showAllArticles(Model model) {
         model.addAttribute("articles", articleDao.getAllArticles());
         return "articles";
     }
 
     @RequestMapping("/add")
-    public String addArticleForm(Model model){
+    public String addArticleForm(Model model) {
         model.addAttribute("article", new Article());
         return "addArticle";
     }
 
     @PostMapping("/add")
-    public String addNewArticle(@Valid Article article, BindingResult result,HttpServletRequest httpServletRequest){
-        if(result.hasErrors()){
-            return "addArticle";
+    public String addNewArticle(@Valid Article article, BindingResult result) {
+        boolean draft = article.isDraft();
+        if(draft) {
+            Set<ConstraintViolation<Article>> validate = validator.validate(article, DraftValid.class);
+            if (validate.isEmpty()) {
+                draftRepository.save(new Draft(article.getTitle(), article.getContent()));
+                return "redirect:/articles";
+            }
         }
-        articleDao.saveArticle(article);
-        return "redirect:/articles";
+        Set<ConstraintViolation<Article>> validate1 = validator.validate(article, ArticleValid.class);
+        if (validate1.isEmpty()) {
+            articleDao.saveArticle(article);
+            return "redirect:/articles";
+        }
+        return "addArticle";
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteArticle(@PathVariable long id){
+    public String deleteArticle(@PathVariable long id) {
         Article artickleById = articleDao.getArtickleById(id);
         articleDao.deleteArticle(artickleById);
         return "redirect:/articles";
     }
 
     @ModelAttribute("categories")
-    public List<Category> getCategories(){
+    public List<Category> getCategories() {
         return this.categoryDao.getAllCategories();
     }
+
     @ModelAttribute("authors")
-    public List<Author> getAuthors(){
+    public List<Author> getAuthors() {
         return this.authorDao.getAllAuthors();
     }
 

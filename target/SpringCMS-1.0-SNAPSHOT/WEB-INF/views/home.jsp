@@ -21,8 +21,8 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
-            <table border>
+        <div class="col-12">
+            <table border class="table table-hover">
                 <thead>
                 <th>Tytuł</th>
                 <th>Data dodania</th>
@@ -39,17 +39,22 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-3" style="background-color: fuchsia">
-            <a href="/authors">Autorzy</a>
-        </div>
-        <div class="col-md-3" style="background-color: aqua">
-            <a href="/cat">Categorie</a>
-        </div>
-        <div class="clo-md-3" style="background-color: darkgray">
-            <a href="/articles">Articles</a>
-        </div>
-        <div class="clo-md-3" style="background-color: cornflowerblue">
-            <a href="/draft">Drafts</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-md-3" style="background-color: fuchsia">
+                    <a href="/authors">Autorzy</a>
+                </div>
+                <div class="col-md-3" style="background-color: aqua">
+                    <a href="/cat">Categorie</a>
+                </div>
+                <div class="clo-md-3" style="background-color: darkgray">
+                    <a href="/articles">Articles</a>
+                </div>
+                <div class="clo-md-3" style="background-color: cornflowerblue">
+                    <a href="/draft">Drafts</a>
+                </div>
         </div>
     </div>
 </div>

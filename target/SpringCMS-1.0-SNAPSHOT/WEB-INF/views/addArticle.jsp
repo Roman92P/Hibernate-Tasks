@@ -48,7 +48,6 @@
     <label for ="draft">Draft</label>
     <br>
     <form:checkbox path="draft" label="draftcheck" value="1"/>
-    <form:errors path="draft"/>
     <br>
     <input type="submit">
 </form:form>

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.GroupSequence;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@GroupSequence({ArticleValid.class, DraftValid.class,Article.class})
 public class Article{
 
     @Id
@@ -22,12 +25,12 @@ public class Article{
     private long id;
 
     @Column(length = 200)
-    @NotEmpty
-    @Size(max = 200,message = "maksimum 200 znaków")
+    @NotEmpty(groups = {ArticleValid.class, DraftValid.class})
+    @Size(max = 200,message = "maksimum 200 znaków",groups = {ArticleValid.class, DraftValid.class})
     private String title;
 
-    @NotEmpty
-    @Size(min = 10, message = "minimum 10 znaków")
+    @NotEmpty(groups = {ArticleValid.class, DraftValid.class})
+    @Size(min = 10, message = "minimum 10 znaków",groups = {ArticleValid.class, DraftValid.class})
     private String content;
 
     @OneToOne
@@ -35,6 +38,7 @@ public class Article{
     private Author author;
 
 
+    @Size(min=1, groups = {ArticleValid.class})
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),

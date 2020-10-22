@@ -25,4 +25,9 @@ public class Draft {
 
     public Draft() {
     }
+
+    public Draft(@NotEmpty(message = "To pole musi być wypełnione") String title, @NotEmpty(message = "O tym polu też nie zapomnij") String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

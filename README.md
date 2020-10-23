@@ -1,5 +1,4 @@
-# Hibernate-Tasks brands Style (fab)
-
+# Hibernate-Tasks 
 ## tasks for practise Hibernate and Spring
 ### Introduction
 * The goal is to learn:

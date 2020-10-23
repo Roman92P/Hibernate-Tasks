@@ -8,12 +8,4 @@
 4. Creating Forms and **Controllers**
 5. Working with Spring Data Repositories
 6. Using **Hibernate Validator**
-<div class="panel panel-gitlab-orange">
-**Heading**
-{: .panel-heading}
-<div class="panel-body">
-
-Text in markdown.
-
-</div>
-</div
+<i class="fab fa-java"></i>

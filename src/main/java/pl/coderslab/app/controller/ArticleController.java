@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.app.model.*;
-import pl.coderslab.app.repository.ArticleDao;
-import pl.coderslab.app.repository.AuthorDao;
-import pl.coderslab.app.repository.CategoryDao;
-import pl.coderslab.app.repository.DraftRepository;
+import pl.coderslab.app.repository.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validator;
@@ -35,6 +31,9 @@ public class ArticleController {
     private final CategoryDao categoryDao;
     private final DraftRepository draftRepository;
 
+    @Autowired
+    ArticleRepository articleRepository;
+
     @RequestMapping
     public String showAllArticles(Model model) {
         model.addAttribute("articles", articleDao.getAllArticles());
@@ -46,23 +45,30 @@ public class ArticleController {
         model.addAttribute("article", new Article());
         return "addArticle";
     }
-
     @PostMapping("/add")
-    public String addNewArticle(@Valid Article article, BindingResult result) {
-        boolean draft = article.isDraft();
-        if(draft) {
+    public String validandSafenewArticle(@Valid Article article, BindingResult result){
+        if(article.isDraft()) {
             Set<ConstraintViolation<Article>> validate = validator.validate(article, DraftValid.class);
             if (validate.isEmpty()) {
-                draftRepository.save(new Draft(article.getTitle(), article.getContent()));
-                return "redirect:/articles";
+                Draft draft = new Draft();
+                draft.setTitle(article.getTitle());
+                draft.setContent(article.getContent());
+                draftRepository.save(draft);
+                return "redirect:/draft";
+            }
+            if(result.hasErrors()){
+                return "addArticle";
             }
         }
-        Set<ConstraintViolation<Article>> validate1 = validator.validate(article, ArticleValid.class);
-        if (validate1.isEmpty()) {
-            articleDao.saveArticle(article);
-            return "redirect:/articles";
-        }
-        return "addArticle";
+            Set<ConstraintViolation<Article>> validate1 = validator.validate(article);
+            if (!validate1.isEmpty()) {
+                return "addArticle";
+            }
+            if(result.hasErrors()){
+                return "addArticle";
+            }
+            articleRepository.save(article);
+            return "redirect:/";
     }
 
     @RequestMapping("/delete/{id}")

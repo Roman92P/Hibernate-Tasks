@@ -19,46 +19,44 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-3">
-            <div class="form-group">
-                <form:form action="${pageContext.request.contextPath}/articles/add" method="post"
-                           modelAttribute="article"
-                           class="border">
-                    <p hidden><form:input path="id"/></p>
-                    <label for="content">Content</label>
-                    <br>
-                    <form:input path="content" id="content"/>
-                    <br>
-                    <form:errors path="content" cssClass="error"/>
-                    <br>
-                    <label for="title">Title</label>
-                    <br>
-                    <form:input path="title" id="title"/>
-                    <br>
-                    <form:errors path="title" cssClass="error"/>
-                    <br>
-                    <form:select path="author">
-                        <form:option value="0" label="Choose"/>
-                        <form:options itemValue="id" itemLabel="firstName" items="${authors}"/>
-                    </form:select>
-                    <br>
-                    <form:errors path="author" cssClass="error"/>
-                    <br>
-                    <label for="categoryList">Choose category </label>
-                    <br>
-                    <form:select path="categoryList">
-                        <form:option value="0" label="Please select one or more"/>
-                        <form:options items="${categories}" itemValue="id" itemLabel="name"/>
-                    </form:select>
-                    <br>
-                    <form:errors path="categoryList"/>
-                    <br>
-                    <label for="draft">Draft</label>
-                    <br>
-                    <form:checkbox path="draft" label="draftcheck" value="1"/>
-                    <br>
-                    <input type="submit">
-                </form:form>
-            </div>
+        <form:form action="${pageContext.request.contextPath}/articles/add" method="post" modelAttribute="article"
+                   class="border">
+            <p hidden><form:input path="id"/></p>
+            <label for="content">Content</label>
+            <br>
+            <form:input path="content" id="content"/>
+            <br>
+            <form:errors path="content" cssClass="error"/>
+            <br>
+            <label for="title">Title</label>
+            <br>
+            <form:input path="title" id="title"/>
+            <br>
+            <form:errors path="title" cssClass="error"/>
+            <br>
+            <form:select path="author">
+                <form:option value="0" label="Choose"/>
+                <form:options itemValue="id" itemLabel="firstName" items="${authors}"/>
+            </form:select>
+            <br>
+            <form:errors path="author" cssClass="error"/>
+            <br>
+            <label for="categoryList">Choose category </label>
+            <br>
+            <form:select path="categoryList">
+                <form:option value="0" label="Please select one or more"/>
+                <form:options items="${categories}" itemValue="id" itemLabel="name"/>
+            </form:select>
+            <br>
+            <form:errors path="categoryList"/>
+            <br>
+            <label for="draft">Draft</label>
+            <br>
+            <form:checkbox path="draft" label="draftcheck" value="1"/>
+            <br>
+            <form:errors path="draft"/>
+            <input type="submit">
+        </form:form>
         </div>
     </div>
 </div>

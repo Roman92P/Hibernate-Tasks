@@ -46,17 +46,30 @@
                 <div class="col-md-3" style="background-color: fuchsia">
                     <a href="/authors">Autorzy</a>
                 </div>
+            </div>
+            <div class="col-12">
                 <div class="col-md-3" style="background-color: aqua">
                     <a href="/cat">Categorie</a>
                 </div>
-                <div class="clo-md-3" style="background-color: darkgray">
+            </div>
+            <div class="col-12">
+                <div class="col-md-3" style="background-color: darkgray">
                     <a href="/articles">Articles</a>
                 </div>
-                <div class="clo-md-3" style="background-color: cornflowerblue">
+            </div>
+            <div class="col-12">
+                <div class="col-md-3" style="background-color: cornflowerblue">
                     <a href="/draft">Drafts</a>
                 </div>
+            </div>
+            <div class="col-12">
+                <div class="col-md-3" style="background-color: lemonchiffon">
+                    <a href="/home">Other home page</a>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

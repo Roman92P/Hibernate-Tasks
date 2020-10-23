@@ -12,3 +12,8 @@ INSERT INTO Article(content, created, title, author_id) VALUES ('treść5', '202
 INSERT INTO categories (description, name) VALUES ('Opis1','Nazwa opisu 1');
 INSERT INTO categories (description, name) VALUES ('Opis2','Nazwa opisu 2');
 INSERT INTO categories (description, name) VALUES ('Opis3','Nazwa opisu 3');
+INSERT INTO article_category(article_id, category_id) VALUES (1,1);
+INSERT INTO article_category(article_id, category_id) VALUES (2,1);
+INSERT INTO article_category(article_id, category_id) VALUES (3,1);
+INSERT INTO article_category(article_id, category_id) VALUES (3,2);
+INSERT INTO article_category(article_id, category_id) VALUES (2,2);

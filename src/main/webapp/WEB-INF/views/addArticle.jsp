@@ -54,6 +54,7 @@
             <br>
             <form:checkbox path="draft" label="draftcheck" value="1"/>
             <br>
+            <form:errors path="draft"/>
             <input type="submit">
         </form:form>
         </div>

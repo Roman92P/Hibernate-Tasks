@@ -13,7 +13,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -31,8 +33,8 @@ public class Category {
     private String name;
     @Column(nullable = true)
     private String description;
-    @ManyToMany(mappedBy = "categoryList",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Article>articles = new ArrayList<>();
+    @ManyToMany(mappedBy = "categoryList", fetch = FetchType.EAGER)
+    private Set<Article> articles = new HashSet<>();
     public Category() {
     }
 

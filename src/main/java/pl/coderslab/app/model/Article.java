@@ -3,7 +3,6 @@ package pl.coderslab.app.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.coderslab.app.model.tests.CategoryValidate;
 
 import javax.persistence.*;
 import javax.validation.GroupSequence;
@@ -11,40 +10,38 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @Getter
 @Setter
-@GroupSequence({ArticleValid.class, DraftValid.class,Article.class})
-public class Article{
+@GroupSequence({Article.class,DraftValid.class})
+public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(length = 200)
-    @NotEmpty(groups = {ArticleValid.class, DraftValid.class})
-    @Size(max = 200,message = "maksimum 200 znaków",groups = {ArticleValid.class, DraftValid.class})
+    @NotEmpty(groups = {Default.class,Article.class, DraftValid.class})
+    @Size(max = 200, message = "maksimum 200 znaków", groups = {Default.class,Article.class})
     private String title;
 
-    @NotEmpty(groups = {ArticleValid.class, DraftValid.class})
-    @Size(min = 10, message = "minimum 10 znaków",groups = {ArticleValid.class, DraftValid.class})
+    @NotEmpty(groups = {Default.class,Article.class, DraftValid.class})
     private String content;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
-
-    @CategoryValidate(groups = Default.class)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "Wrong")
+    @ManyToMany
     @JoinTable(name = "article_category",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categoryList = new ArrayList<>();
+    private Set<Category> categoryList = new HashSet<>();
 
 
     @Transient
@@ -66,6 +63,7 @@ public class Article{
     public void preUpdate() {
         updated = LocalDateTime.now();
     }
+
 
 }
 
